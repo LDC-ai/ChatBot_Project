@@ -1,7 +1,0 @@
-*.xlsx
-*.json
-*.csv
-.env
-*.faiss
-*.pkl
-*.index
