@@ -1,3 +1,8 @@
 *.xlsx
 *.json
 *.csv
+<<<<<<< HEAD
+=======
+.env
+
+>>>>>>> 13dda35 (fix)
