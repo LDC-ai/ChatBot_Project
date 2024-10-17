@@ -1,6 +1,10 @@
 *.xlsx
 *.json
+<<<<<<< HEAD
 *.csv
 .env
 *.faiss
 *.pkl
+=======
+*.index
+>>>>>>> de028e0 ([Fix]json정리및모델수정)
