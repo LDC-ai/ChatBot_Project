@@ -1,6 +1,0 @@
-.env
-*.xlsx
-*.json
-*.index
-/home/elicer/ChatBot_Project/.gitignore
-requirements.txt
