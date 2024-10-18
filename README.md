@@ -12,6 +12,7 @@
 - 참가신청 : 2024.08.23~2024.10.25
 
 ## 4. 내용
+![테스트이미지](https://github.com/LDC-ai/ChatBot_Project/blob/main/project/chatbot.jpg)
 
 ## 5. 프로젝트 담당 역할
 - 챗봇 학습용 데이터 전처리
