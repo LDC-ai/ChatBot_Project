@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 import os
 import torch
 import streamlit as st
@@ -25,14 +23,11 @@ openai_api_key = os.getenv("OPENAI_API_KEY")
 
 # JSON 문서 로드 및 처리
 file_path = 'merged_data.json'
-=======
 import requests
 import random
 from bs4 import BeautifulSoup
-=======
 import os
 import torch
->>>>>>> 13a757c ([fix]streamlit_코드_업데이트)
 import streamlit as st
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import FAISS
@@ -56,11 +51,7 @@ openai_api_key = os.getenv("OPENAI_API_KEY")
 
 # JSON 문서 로드 및 처리
 file_path = 'merged_data.json'
-<<<<<<< HEAD
 # JSONLoader의 jq_schema 설정
->>>>>>> 9cc0f52 ([fix] streamlit 챗봇 파일업데이트)
-=======
->>>>>>> 13a757c ([fix]streamlit_코드_업데이트)
 jq_schema = """
 .[] | {
     "filename": .filename,
@@ -138,9 +129,6 @@ jq_schema = """
     }
 }
 """
-
-<<<<<<< HEAD
-<<<<<<< HEAD
 # JSON 파일 로드
 loader = JSONLoader(file_path, jq_schema=jq_schema, text_content=False)
 documents = loader.load()
@@ -223,13 +211,9 @@ agent.agent.llm_chain.prompt.messages[0].prompt.template = ("Be sure to answer i
     "Do not mention the use of tools; just provide the necessary information."
 )
 
-=======
 # JSONLoader를 사용하여 파일 로드
 loader = JSONLoader(file_path, jq_schema=jq_schema, text_content=False)  # text_content=False 설정
-=======
-# JSON 파일 로드
-loader = JSONLoader(file_path, jq_schema=jq_schema, text_content=False)
->>>>>>> 13a757c ([fix]streamlit_코드_업데이트)
+
 documents = loader.load()
 
 # 텍스트 분할기 설정
@@ -310,14 +294,9 @@ agent.agent.llm_chain.prompt.messages[0].prompt.template = ("Be sure to answer i
     "Do not mention the use of tools; just provide the necessary information."
 )
 
-<<<<<<< HEAD
 ########## 7. Agent 파서를 정의 ##########
 agent_stream_parser = AgentStreamParser()
 
-
->>>>>>> 9cc0f52 ([fix] streamlit 챗봇 파일업데이트)
-=======
->>>>>>> 13a757c ([fix]streamlit_코드_업데이트)
 # 시작 타이틀
 st.title('안녕하세요! 국회 회의록 검색 서비스 챗봇입니다')
 
@@ -325,8 +304,6 @@ st.title('안녕하세요! 국회 회의록 검색 서비스 챗봇입니다')
 if "messages" not in st.session_state:
     st.session_state["messages"] = [] 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 if "session_history" not in st.session_state:
     st.session_state["session_history"] = {}  # 세션 기록을 위한 딕셔너리
 
@@ -376,13 +353,12 @@ if user_input:
 print_messages()
 
 
-=======
+
 if "answer_list" not in st.session_state:
     st.session_state["answer_list"] = ['안녕'] 
-=======
+
 if "session_history" not in st.session_state:
     st.session_state["session_history"] = {}  # 세션 기록을 위한 딕셔너리
->>>>>>> 13a757c ([fix]streamlit_코드_업데이트)
 
 def chat_with_agent(user_input):
     # 에이전트와 대화하여 응답을 얻는 함수
@@ -429,10 +405,5 @@ if user_input:
 # 대화 내용 출력
 print_messages()
 
-
-<<<<<<< HEAD
 if agent_stream_parser.final_response:
     st.chat_message("assistant").write(agent_stream_parser.final_response)
->>>>>>> 9cc0f52 ([fix] streamlit 챗봇 파일업데이트)
-=======
->>>>>>> 13a757c ([fix]streamlit_코드_업데이트)
