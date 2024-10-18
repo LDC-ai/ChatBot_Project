@@ -2,5 +2,5 @@
 *.xlsx
 *.json
 *.index
-.gitignore
+/home/elicer/ChatBot_Project/.gitignore
 requirements.txt
