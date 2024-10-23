@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import os
 import torch
 import streamlit as st
+import time
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import FAISS
 from langchain.embeddings import HuggingFaceEmbeddings
@@ -15,6 +16,7 @@ from langchain.document_loaders import JSONLoader
 from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_core.chat_history import BaseChatMessageHistory
 from langchain_core.runnables.history import RunnableWithMessageHistory
+from langchain_core.callbacks.base import BaseCallbackHandler
 
 from dotenv import load_dotenv
 
@@ -145,7 +147,7 @@ json_search_tool = Tool(
 tools = [json_search_tool]
 
 # LLM 정의
-llm = ChatOpenAI(model_name="gpt-4", temperature=0, openai_api_key=openai_api_key)
+llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0, openai_api_key=openai_api_key)
 
 # 메모리 설정
 memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
@@ -189,14 +191,28 @@ def get_session_history(session_ids):
         st.session_state.session_history[session_ids] = ChatMessageHistory()
     return st.session_state.session_history[session_ids]  # 해당 세션 ID에 대한 세션 기록 반환
 
+# 대화창 메세지 스트리밍 class
+class StreamHandler(BaseCallbackHandler):
+    def __init__(self, container, initial_text=""):
+        self.container = container
+        self.text = initial_text  
+    
+    def on_llm_new_token(self,token:str,**kwargs) -> None:
+        self.text += token
+        self.container.markdown(self.text)
+
 # 대화 내용을 출력하는 함수
 def print_messages():
     """대화 내용을 출력하는 함수"""
     for msg in st.session_state["messages"]:
-        st.chat_message(msg['role']).write(msg['content'])
+        with st.chat_message(msg['role']):
+            steram_handler = StreamHandler(st.empty())
+            st.write(msg['content'])
 
 # 사용자 입력 처리
 user_input = st.chat_input('질문이 무엇인가요?')
+
+
 
 if user_input:
     # 세션 ID를 설정
@@ -211,6 +227,8 @@ if user_input:
         response = chat_with_agent(user_input + "\n\nPrevious Messages: " + str(previous_messages))
     else:
         response = chat_with_agent(user_input)
+
+
 
     # 메시지를 세션에 추가
     st.session_state["messages"].append({"role": "user", "content": user_input})
