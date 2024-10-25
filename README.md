@@ -95,7 +95,6 @@
 - **agent prompt**와 **agent tool의 description**에 한국어를 영문으로 번역하여 검색하도록 주문하여 검색 성능을 높임
 
 #### 6.3.8 TruePhoenix.py (ver.8)
-- 토큰이 많이 필요한 **LangGraph**기능을 삭제함
 - **streamlit**라이브러리의 **st.sidebar**기능을 이용하여, 대화내용을 저장, 불러오기할 수 있도록 개선함
 - **RAG retreiver**의 검색값(k)을 조정하여, 소모하는 토큰수를 줄임
 ![테스트이미지](https://github.com/LDC-ai/ChatBot_Project/blob/main/project/acfd218040b1e444.png)
