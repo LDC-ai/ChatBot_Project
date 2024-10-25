@@ -93,6 +93,7 @@
 #### 6.3.7 PhoenixChatBot.py (ver.7)
 - **streamlit**을 이용하여 웹에서 RAG기능을 기반으로한 챗봇을 설계
 - **agent prompt**와 **agent tool의 description**에 한국어를 영문으로 번역하여 검색하도록 주문하여 검색 성능을 높임
+- 검색 성능 상승에 영향이 없는 **Workflow**의 재귀과정을 삭제하고, 선형적으로 단순화하여 토큰값을 줄임
 
 #### 6.3.8 TruePhoenix.py (ver.8)
 - **streamlit**라이브러리의 **st.sidebar**기능을 이용하여, 대화내용을 저장, 불러오기할 수 있도록 개선함
