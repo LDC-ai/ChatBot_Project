@@ -88,6 +88,7 @@
 - **Ensemble Retriever**를 활용하여 **Bm25**와 **FAISS + MultiQuery**리트리버를 가중값(0.7,0.3)으로 결합한 Retriever를 사용하여 검색을 수행
 -  **GroundedCheck**기능은 토큰값을 많이 소모하기 때문에 삭제하였음.
 - 대신, 재귀과정**Workflow**를 설계하였으나, 성능이 낮음.
+
 ![테스트이미지](https://github.com/LDC-ai/ChatBot_Project/blob/main/project/workflow.jpg)
 
 #### 6.3.7 PhoenixChatBot.py (ver.7)
@@ -98,6 +99,7 @@
 #### 6.3.8 TruePhoenix.py (ver.8)
 - **streamlit**라이브러리의 **st.sidebar**기능을 이용하여, 대화내용을 저장, 불러오기할 수 있도록 개선함
 - **RAG retreiver**의 검색값(k)을 조정하여, 소모하는 토큰수를 줄임
+  
 ![테스트이미지](https://github.com/LDC-ai/ChatBot_Project/blob/main/project/acfd218040b1e444.png)
 
 
