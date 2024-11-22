@@ -39,6 +39,7 @@ workflow.add_node("retrieve", retrieve_document)
 workflow.add_node("llm_answer", llm_answer)
 workflow.add_edge("retrieve", "llm_answer")
 workflow.set_entry_point("retrieve")
+```
 
 **효과**:  
 - 경량화된 체인은 응답 시간을 단축하고 불필요한 상태 관리를 제거하여 성능이 크게 향상.
@@ -47,12 +48,13 @@ workflow.set_entry_point("retrieve")
 
 수정 후 코드:
 
-python
+```python
 코드 복사
 llm_chain = ({"Reference": json_search_tool, "Command": RunnablePassthrough()} 
              | prompt 
              | llm 
              | StrOutputParser())
+```
 
 ### **2.2. 데이터 처리 효율화**
 
@@ -62,7 +64,7 @@ llm_chain = ({"Reference": json_search_tool, "Command": RunnablePassthrough()}
 
 수정 전 코드 (복잡한 JSON 데이터 처리):
 
-python
+```python
 코드 복사
 filename_match = re.search(r"'filename': '([^']*)'", data_str)
 organized_data['filename'] = filename_match.group(1) if filename_match else None
@@ -72,10 +74,11 @@ organized_data['date'] = date_match.group(1) if date_match else None
 
 conference_number_match = re.search(r"'conference_number': '([^']*)'", data_str)
 organized_data['conference_number'] = conference_number_match.group(1) if conference_number_match else None
+```
 # 기타 필드...
 수정 후 코드:
 
-python
+```python
 코드 복사
 filename_match = re.search(r"'filename': '([^']*)'", data_str)
 organized_data['filename'] = filename_match.group(1) if filename_match else None
@@ -85,7 +88,7 @@ organized_data['agenda'] = agenda_match.group(1) if agenda_match else None
 
 context_match = re.search(r"'context': '([^']*)'", data_str)
 organized_data['context'] = context_match.group(1) if context_match else None
-
+```
 **효과**:  
 - 메모리 사용량이 줄어들었고, 데이터 처리 속도가 크게 향상.
 - 단순화된 데이터 구조로 검색 및 문서 매칭의 정확도가 증가.
@@ -100,7 +103,7 @@ organized_data['context'] = context_match.group(1) if context_match else None
 
 수정 전 코드:
 
-python
+```python
 코드 복사
 agent.agent.llm_chain.prompt.messages[0].prompt.template = (
     "You are an AI assistant that helps users find information about individuals or issues from the National Assembly JSON document. "
@@ -108,9 +111,10 @@ agent.agent.llm_chain.prompt.messages[0].prompt.template = (
     "If the user inputs a question in Korean, translate it into English before proceeding with the search. "
     "For queries related to specific policies or legislative issues, summarize the discussions in chronological order and by issue. "
 )
+```
 수정 후 코드:
 
-python
+```python
 코드 복사
 template = """
 "Command" : {Command}
@@ -122,6 +126,7 @@ template = """
 "Answer the Command based on References. Be sure to answer in Korean."
 """
 prompt = PromptTemplate.from_template(template)
+```
 
 **효과**:  
 - 불필요한 정보를 제거하여 프롬프트의 간결성 증가.
